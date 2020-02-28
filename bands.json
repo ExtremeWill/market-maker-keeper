@@ -1,0 +1,29 @@
+{
+    "_buyToken": "USDT",
+    "buyBands": [
+        {
+            "minMargin": 0.005,
+            "avgMargin": 0.01,
+            "maxMargin": 0.02,
+            "minAmount": 0.1,
+            "avgAmount": 0.1,
+            "maxAmount": 0.1,
+            "dustCutoff": 0.1
+        }
+    ],
+    "buyLimits": [],
+
+    "_sellToken": "DAI",
+    "sellBands": [
+        {
+            "minMargin": 0.005,
+            "avgMargin": 0.01,
+            "maxMargin": 0.02,
+            "minAmount": 0.1,
+            "avgAmount": 0.1,
+            "maxAmount": 0.1,
+            "dustCutoff": 0.1
+        }
+    ],
+    "sellLimits": []
+}

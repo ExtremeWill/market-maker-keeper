@@ -1,0 +1,17 @@
+#!/bin/bash
+
+    bin/oasis-market-maker-keeper \
+        --rpc-host 127.0.0.1 \
+        --rpc-port <port number> \
+        --rpc-timeout 10 \
+        --eth-from 0xD07e2C9101D0DaA0f18Cd00AE264ECA2Fb2e3b59 \
+    		--eth-key "key_file=./keystore.json,pass_file=keystore.pass" \
+        --tub-address 0xa71937147b55deb8a530c7229c442fd3f31b7db2 \
+        --oasis-address 0x4a6bc4e803c62081ffebcc8d227b5a87a58f1f8f \
+        --price-feed fixed:200 \
+        --buy-token-address 0xc4375b7de8af5a38a93548eb8453a498222c4ff2 \
+        --sell-token-address 0xd0a1e359811322d97991e03f863a0c30c2cf029c \
+        --config [path to the json bands configuration file, e.g. bands.json] \
+        --smart-gas-price \
+        --ethgasstation-api-key API_KEY_HERE \
+        --min-eth-balance 0.001

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+    bin/okex-market-maker-keeper \
+        --okex-api-server https://www.okex.me \
+        --okex-api-key c669348a-5990-49e8-92bb-5ad941752c10 \
+        --okex-secret-key F1D2FA235C15EC7AF2FB52716FCD0F5C \
+        --okex-password xingyun14maker \
+        --okex-timeout 9.5 \
+        --pair DAI_USDT \
+        --config ./bands.json \
+        --price-feed fixed:1
