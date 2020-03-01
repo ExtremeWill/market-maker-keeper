@@ -24,7 +24,7 @@ from typing import Optional, List
 import websocket
 
 from gdax_client.price import GdaxPriceClient, GDAX_WS_URL
-from gdax_client.okprice import OKPriceClient, OK_WS_URL
+from market_maker_keeper.okex_price import OKPriceClient, OK_WS_URL
 from market_maker_keeper.feed import ExpiringFeed, WebSocketFeed, Feed
 from market_maker_keeper.setzer import Setzer
 from pymaker.feed import DSValue
