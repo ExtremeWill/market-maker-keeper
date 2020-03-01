@@ -89,8 +89,8 @@ class OKPriceClient:
             elif message_obj['type'] == 'heartbeat':
                 self._process_heartbeat()
 
-            elif message_obj['type'] == 'snapshot':
-                self._process_snapshot(message_obj)
+            # elif message_obj['type'] == 'snapshot':
+            #     self._process_snapshot(message_obj)
 
             elif message_obj['type'] == 'l2update':
                 self._process_l2update(message_obj)
@@ -144,23 +144,23 @@ class OKPriceClient:
             self._expired = False
 
 
-    def _process_snapshot(self, message_obj):
-        #NOTES: quantize is what allows us to specify decimal place
-
-        # def _load_book(side, new_side):
-        #
-        #     for order in side:
-        #         new_side[Decimal(order[0]).quantize(Decimal('1.00000000'))] = Decimal(order[1])
-        #
-        #     return new_side
-        #
-        # self._bids = _load_book(message_obj['bids'], SortedDict(neg))
-        # self._asks = _load_book(message_obj['asks'], SortedDict())
-        # self._last_obook_timestamp = time.time()
-        #
-        # if self._obook_expired:
-        #     self.logger.info(f"Orderbook price feed from GDAX ({self.product_id}) became available")
-        #     self._obook_expired = False
+    # def _process_snapshot(self, message_obj):
+    #     #NOTES: quantize is what allows us to specify decimal place
+    #
+    #     def _load_book(side, new_side):
+    #
+    #         for order in side:
+    #             new_side[Decimal(order[0]).quantize(Decimal('1.00000000'))] = Decimal(order[1])
+    #
+    #         return new_side
+    #
+    #     self._bids = _load_book(message_obj['bids'], SortedDict(neg))
+    #     self._asks = _load_book(message_obj['asks'], SortedDict())
+    #     self._last_obook_timestamp = time.time()
+    #
+    #     if self._obook_expired:
+    #         self.logger.info(f"Orderbook price feed from GDAX ({self.product_id}) became available")
+    #         self._obook_expired = False
 
     def _process_l2update(self, message_obj):
 
