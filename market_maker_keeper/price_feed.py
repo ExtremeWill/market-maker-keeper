@@ -24,6 +24,7 @@ from typing import Optional, List
 import websocket
 
 from gdax_client.price import GdaxPriceClient, GDAX_WS_URL
+from gdax_client.okprice import OKPriceClient, OK_WS_URL
 from market_maker_keeper.feed import ExpiringFeed, WebSocketFeed, Feed
 from market_maker_keeper.setzer import Setzer
 from pymaker.feed import DSValue
@@ -140,6 +141,27 @@ class GdaxPriceFeed(PriceFeed):
         else:
             return Price(buy_price=None, sell_price=None)
 
+class OKPriceFeed(PriceFeed):
+    logger = logging.getLogger()
+
+    def __init__(self, product_id: str, expiry: int):
+        assert(isinstance(product_id, str))
+        assert(isinstance(expiry, int))
+
+        self.logger.info("OKPriceFeed =================")
+        self.ok_price_client = OKPriceClient(ws_url=OK_WS_URL,
+                                                 product_id=product_id,
+                                                 expiry=expiry)
+
+    def get_price(self) -> Price:
+        ok_price = self.ok_price_client.get_price()
+
+        if ok_price:
+            return Price(buy_price=Wad.from_number(ok_price), sell_price=Wad.from_number(ok_price))
+
+        else:
+            return Price(buy_price=None, sell_price=None)
+
 
 class GdaxMidpointPriceFeed(GdaxPriceFeed):
 
@@ -247,6 +269,7 @@ class BackupPriceFeed(PriceFeed):
 
 
 class PriceFeedFactory:
+
     @staticmethod
     def create_price_feed(arguments, tub: Tub = None) -> PriceFeed:
         return BackupPriceFeed([PriceFeedFactory._create_price_feed(price_feed, arguments.price_feed_expiry, tub)
@@ -268,6 +291,10 @@ class PriceFeedFactory:
 
         if price_feed_argument == 'eth_dai':
             return GdaxPriceFeed(product_id="ETH-USD",
+                                 expiry=price_feed_expiry_argument)
+
+        if price_feed_argument == 'ok_dai_usdt':
+            return OKPriceFeed(product_id="DAI-USDT",
                                  expiry=price_feed_expiry_argument)
 
         elif price_feed_argument == 'eth_dai-setzer':

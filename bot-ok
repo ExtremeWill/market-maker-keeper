@@ -2,10 +2,10 @@
 
     bin/okex-market-maker-keeper \
         --okex-api-server https://www.okex.com \
-        --okex-api-key c669348a-5990-49e8-92bb-5ad941752c10 \
-        --okex-secret-key F1D2FA235C15EC7AF2FB52716FCD0F5C \
-        --okex-password xingyun14maker \
+        --okex-api-key c0160a75-5546-41ac-9907-04f2b0c26bb3 \
+        --okex-secret-key 2FBBA27BD1CA7C671C8B679C86EDAB00 \
+        --okex-password hkmaker12345 \
         --okex-timeout 9.5 \
         --pair DAI_USDT \
         --config ./bands.json \
-        --price-feed fixed:1
+        --price-feed ok_dai_usdt
