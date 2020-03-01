@@ -78,7 +78,14 @@ class OKPriceClient:
 
     def _on_message(self, ws, message):
         self.logger.info("message:%s" % message)
-        self.logger.info("message:%s" % self._inflate(message))
+
+        decompress = zlib.decompressobj(
+            -zlib.MAX_WBITS  # see above
+        )
+        inflated = decompress.decompress(message)
+        inflated += decompress.flush()
+
+        self.logger.info("message:%s" % self._inflate(inflated))
         try:
             message_obj = json.loads(message)
             if message_obj['type'] == 'subscriptions':
