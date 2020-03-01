@@ -85,7 +85,7 @@ class OKPriceClient:
         inflated = decompress.decompress(message)
         inflated += decompress.flush()
 
-        self.logger.info("message:%s" % self._inflate(inflated))
+        self.logger.info("message:%s" % inflated)
         try:
             message_obj = json.loads(message)
             if message_obj['type'] == 'subscriptions':
