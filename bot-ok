@@ -7,6 +7,6 @@
         --okex-password hkmaker12345 \
         --okex-timeout 9.5 \
         --pair DAI_USDT \
-        --config ./bands.json \
+        --config ./ok-daiusdt-bands.json \
         --price-feed ok_dai_usdt \
         --price-feed-expiry 480

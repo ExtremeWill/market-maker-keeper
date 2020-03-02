@@ -4,7 +4,7 @@ services:
     build: .
     image: makerdao/market-maker-keeper
 
-  okex-usdtdai-keeper:
+  bot-ok:
     image: makerdao/market-maker-keeper
     env_file:
       - .env
@@ -20,7 +20,8 @@ services:
         --pair DAI_USDT \
         --config ./bands.json \
         --price-feed ok_dai_usdt \
-        --price-feed-expiry 480"
+        --price-feed-expiry 480" \
+        --config /opt/maker/config/$${OKEX_DAI_USDT_BANDS?:}"
 
 #      bash -c "./okex-market-maker-keeper \
 #      --coinbase-api-key $${COINBASE_API_KEY} \

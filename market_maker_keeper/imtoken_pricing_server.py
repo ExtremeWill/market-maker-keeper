@@ -96,13 +96,13 @@ class ImtokenPricingServer:
     #     "markets": [
     #         {
     #             "pair": "ETH/DAI",
-    #             "bands": "~/imtoken-ethdai-bands.json",
+    #             "bands": "~/imtoken-ethdai-ok-daiusdt-bands.json",
     #             "price-feed": "eth_dai-pair-midpoint",
     #             "price-feed-expiry": 20
     #         },
     #         {
     #             "pair": "MKR/DAI",
-    #             "bands": "~/imtoken-mkrdai-bands.json",
+    #             "bands": "~/imtoken-mkrdai-ok-daiusdt-bands.json",
     #             "price-feed": "ws://admin:admin@localhost:9595/api/feeds/MKR_DAI_PRICE/socket",
     #             "price-feed-expiry": 20
     #         }
