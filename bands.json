@@ -2,12 +2,45 @@
     "_buyToken": "USDT",
     "buyBands": [
         {
-            "minMargin": 0.005,
-            "avgMargin": 0.01,
-            "maxMargin": 0.02,
-            "minAmount": 0.1,
-            "avgAmount": 0.1,
-            "maxAmount": 0.1,
+            "minMargin": 0.0009,
+            "avgMargin": 0.001,
+            "maxMargin": 0.0011,
+            "minAmount": 0.208,
+            "avgAmount": 0.208,
+            "maxAmount": 0.208,
+            "dustCutoff": 0.1
+        },
+        {
+            "minMargin": 0.0011,
+            "avgMargin": 0.0013,
+            "maxMargin": 0.0015,
+            "minAmount": 0.308,
+            "avgAmount": 0.308,
+            "maxAmount": 0.308,
+            "dustCutoff": 0.1
+        },{
+            "minMargin": 0.0015,
+            "avgMargin": 0.0017,
+            "maxMargin": 0.0019,
+            "minAmount": 0.408,
+            "avgAmount": 0.408,
+            "maxAmount": 0.408,
+            "dustCutoff": 0.1
+        },{
+            "minMargin": 0.0019,
+            "avgMargin": 0.0020,
+            "maxMargin": 0.0021,
+            "minAmount": 0.508,
+            "avgAmount": 0.508,
+            "maxAmount": 0.508,
+            "dustCutoff": 0.1
+        },{
+            "minMargin": 0.0021,
+            "avgMargin": 0.0025,
+            "maxMargin": 0.0030,
+            "minAmount": 0.608,
+            "avgAmount": 0.608,
+            "maxAmount": 0.608,
             "dustCutoff": 0.1
         }
     ],
@@ -16,12 +49,45 @@
     "_sellToken": "DAI",
     "sellBands": [
         {
-            "minMargin": 0.005,
-            "avgMargin": 0.01,
-            "maxMargin": 0.02,
-            "minAmount": 0.1,
-            "avgAmount": 0.1,
-            "maxAmount": 0.1,
+            "minMargin": 0.0009,
+            "avgMargin": 0.001,
+            "maxMargin": 0.0011,
+            "minAmount": 0.208,
+            "avgAmount": 0.208,
+            "maxAmount": 0.208,
+            "dustCutoff": 0.1
+        },
+        {
+            "minMargin": 0.0011,
+            "avgMargin": 0.0013,
+            "maxMargin": 0.0015,
+            "minAmount": 0.308,
+            "avgAmount": 0.308,
+            "maxAmount": 0.308,
+            "dustCutoff": 0.1
+        },{
+            "minMargin": 0.0015,
+            "avgMargin": 0.0017,
+            "maxMargin": 0.0019,
+            "minAmount": 0.408,
+            "avgAmount": 0.408,
+            "maxAmount": 0.408,
+            "dustCutoff": 0.1
+        },{
+            "minMargin": 0.0019,
+            "avgMargin": 0.0020,
+            "maxMargin": 0.0021,
+            "minAmount": 0.508,
+            "avgAmount": 0.508,
+            "maxAmount": 0.508,
+            "dustCutoff": 0.1
+        },{
+            "minMargin": 0.0021,
+            "avgMargin": 0.0025,
+            "maxMargin": 0.0030,
+            "minAmount": 0.608,
+            "avgAmount": 0.608,
+            "maxAmount": 0.608,
             "dustCutoff": 0.1
         }
     ],

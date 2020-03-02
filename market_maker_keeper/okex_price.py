@@ -37,8 +37,6 @@ class OKPriceClient:
         assert(isinstance(product_id, str))
         assert(isinstance(expiry, int))
 
-        self.logger.info("OKPriceFeed22222 =================%s" % ws_url)
-
         self.ws_url = ws_url
         self.product_id = product_id
         self.expiry = expiry
@@ -52,19 +50,18 @@ class OKPriceClient:
         threading.Thread(target=self._background_run, daemon=True).start()
 
     def _background_run(self):
-        self.logger.info("OKPriceFeed33333333 =================")
         while True:
-            self.logger.info("OKPriceFeed5555555 =================")
             ws = websocket.WebSocketApp(url=self.ws_url,
                                         on_message=self._on_message,
                                         on_error=self._on_error,
                                         on_open=self._on_open,
+                                        on_ping=self._on_ping,
+                                        on_pong=self._on_pong,
                                         on_close=self._on_close)
             ws.run_forever(ping_interval=15, ping_timeout=10)
             time.sleep(1)
 
     def _on_open(self, ws):
-        self.logger.info("OKPriceFeed444444444444 =================")
         self.logger.info(f"OKEX {self.product_id} WebSocket connected")
 
         ws.send("""{
@@ -77,8 +74,6 @@ class OKPriceClient:
         self.logger.info(f"GDAX {self.product_id} WebSocket disconnected")
 
     def _on_message(self, ws, message):
-        self.logger.info("message:%s" % message)
-
         decompress = zlib.decompressobj(
             -zlib.MAX_WBITS  # see above
         )
@@ -87,26 +82,35 @@ class OKPriceClient:
 
         self.logger.info("message:%s" % inflated)
         try:
-            message_obj = json.loads(message)
-            if message_obj['type'] == 'subscriptions':
-                pass
+            message_obj = json.loads(inflated)
+            self.logger.info("message_obj:%s" % message_obj)
+            self.logger.info("message_obj_table:%s" % message_obj['table'])
 
-            elif message_obj['table'] == 'spot/ticker':
+            if message_obj['table'] == 'spot/ticker':
+                self.logger.info("i am in table")
                 self._process_ticker(message_obj)
 
-            elif message_obj['type'] == 'heartbeat':
-                self._process_heartbeat()
-
-            # elif message_obj['type'] == 'snapshot':
-            #     self._process_snapshot(message_obj)
-
-            elif message_obj['type'] == 'l2update':
-                self._process_l2update(message_obj)
+            # elif message_obj['type'] == 'heartbeat':
+            #     self._process_heartbeat()
+            #
+            # # elif message_obj['type'] == 'snapshot':
+            # #     self._process_snapshot(message_obj)
+            #
+            # elif message_obj['type'] == 'l2update':
+            #     self._process_l2update(message_obj)
 
             else:
                 self.logger.warning(f"GDAX {self.product_id} WebSocket received unknown message type: '{message}'")
         except:
             self.logger.warning(f"GDAX {self.product_id} WebSocket received invalid message: '{message}'")
+
+    def _on_ping(self, ws):
+        self.logger.info("onPing=============================================")
+
+    def _on_pong(self, ws, message):
+        self.logger.info(f"onPong============================================='{message}'")
+        if time.time() - self._last_timestamp > 30:
+            self.logger.info(f"onPong================send...new...msg...")
 
     def _on_error(self, ws, error):
         self.logger.info(f"GDAX {self.product_id} WebSocket error: '{error}'")
@@ -141,11 +145,11 @@ class OKPriceClient:
 
 
     def _process_ticker(self, message_obj):
-        self.logger.debug("_process_ticker")
         self._last_price = Decimal(message_obj['data'][0]['last'])
+
         self._last_timestamp = time.time()
 
-        self.logger.debug(f"Ticker price feed from OK is {self._last_price} ({self.product_id})")
+        self.logger.info(f"Ticker price feed from OK is {self._last_price} ({self.product_id})")
 
         if self._expired:
             self.logger.info(f"Ticker price feed from OK ({self.product_id}) became available")
