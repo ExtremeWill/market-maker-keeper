@@ -8,4 +8,5 @@
         --okex-timeout 9.5 \
         --pair DAI_USDT \
         --config ./bands.json \
-        --price-feed ok_dai_usdt
+        --price-feed ok_dai_usdt \
+        --price-feed-expiry 480
