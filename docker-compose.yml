@@ -11,10 +11,24 @@ services:
     volumes:
       - $PWD/docker-config:/opt/maker/config
     command: >
-      bash -c "./coinbase-market-maker-keeper \
-      --coinbase-api-key $${COINBASE_API_KEY} \
-      --coinbase-secret-key $${COINBASE_SECRET_KEY} \
-      --coinbase-password $${COINBASE_PASSWORD} \
-      --price-feed $${ETH_DAI_PRICE_FEED?:} \
-      --pair ETH-DAI \
-      --config /opt/maker/config/$${COINBASE_ETH_DAI_BANDS?:}"
+      bash -c "bin/okex-market-maker-keeper \
+        --okex-api-server $${OKEX_API_SERVER} \
+        --okex-api-key $${OKEX_API_KEY} \
+        --okex-secret-key $${OKEX_SECRET_KEY} \
+        --okex-password $${OKEX_PASSWORD} \
+        --okex-timeout 9.5 \
+        --pair DAI_USDT \
+        --config ./bands.json \
+        --price-feed ok_dai_usdt \
+        --price-feed-expiry 480"
+
+#      bash -c "./okex-market-maker-keeper \
+#      --coinbase-api-key $${COINBASE_API_KEY} \
+#      --coinbase-secret-key $${COINBASE_SECRET_KEY} \
+#      --coinbase-password $${COINBASE_PASSWORD} \
+#      --price-feed $${ETH_DAI_PRICE_FEED?:} \
+#      --pair ETH-DAI \
+#      --config /opt/maker/config/$${COINBASE_ETH_DAI_BANDS?:}"
+
+
+
