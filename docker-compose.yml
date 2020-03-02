@@ -4,14 +4,14 @@ services:
     build: .
     image: makerdao/market-maker-keeper
 
-  coinbase-ethdai-keeper:
+  okex-usdtdai-keeper:
     image: makerdao/market-maker-keeper
     env_file:
       - .env
     volumes:
       - $PWD/docker-config:/opt/maker/config
     command: >
-      bash -c "bin/okex-market-maker-keeper \
+      bash -c "./okex-market-maker-keeper \
         --okex-api-server $${OKEX_API_SERVER} \
         --okex-api-key $${OKEX_API_KEY} \
         --okex-secret-key $${OKEX_SECRET_KEY} \
