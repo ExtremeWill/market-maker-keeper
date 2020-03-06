@@ -25,6 +25,7 @@ import websocket
 
 from gdax_client.price import GdaxPriceClient, GDAX_WS_URL
 from market_maker_keeper.okex_price import OKPriceClient, OK_WS_URL
+from market_maker_keeper.oasis_price import OasisPriceClient
 from market_maker_keeper.feed import ExpiringFeed, WebSocketFeed, Feed
 from market_maker_keeper.setzer import Setzer
 from pymaker.feed import DSValue
@@ -158,6 +159,24 @@ class OKPriceFeed(PriceFeed):
 
         if ok_price:
             return Price(buy_price=Wad.from_number(ok_price), sell_price=Wad.from_number(ok_price))
+
+        else:
+            return Price(buy_price=None, sell_price=None)
+
+class OasisPriceFeed(PriceFeed):
+    logger = logging.getLogger()
+
+    def __init__(self, expiry: int):
+        assert(isinstance(expiry, int))
+
+        self.logger.info("OasisPriceFeed =================")
+        self.oasis_price_client = OasisPriceClient(expiry=expiry)
+
+    def get_price(self) -> Price:
+        oasis_price = self.oasis_price_client.get_price()
+
+        if oasis_price:
+            return Price(buy_price=Wad.from_number(oasis_price), sell_price=Wad.from_number(oasis_price))
 
         else:
             return Price(buy_price=None, sell_price=None)
@@ -296,6 +315,9 @@ class PriceFeedFactory:
         if price_feed_argument == 'ok_dai_usdt':
             return OKPriceFeed(product_id="DAI-USDT",
                                  expiry=price_feed_expiry_argument)
+
+        if price_feed_argument == 'oasis_dai_usdc':
+            return OasisPriceFeed(expiry=price_feed_expiry_argument)
 
         elif price_feed_argument == 'eth_dai-setzer':
             return AveragePriceFeed([SetzerPriceFeed('kraken', expiry=price_feed_expiry_argument),
